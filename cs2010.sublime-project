@@ -5,7 +5,7 @@
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
-			"shell_cmd": "\"/home/namnguyen/.virtualenvs/cs2010/bin/python\" -u \"$file\""
+			"shell_cmd": "\"python\" -u \"$file\""
 		}
 	],
 	"folders":
@@ -19,10 +19,10 @@
 		"anaconda_linting": true,
 		"anaconda_linting_behaviour": "always",
 		"pep257": false,
+		"pep8_max_line_length": 100,
 		"python_interpreter": "/home/namnguyen/.virtualenvs/cs2010/bin/python",
 		"test_command": "python -m unittest discover",
 		"use_pylint": false,
-		"validate_imports": true,
-		"pep8_max_line_length": 100,
+		"validate_imports": true
 	}
 }

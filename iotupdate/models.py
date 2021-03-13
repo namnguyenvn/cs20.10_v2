@@ -13,7 +13,7 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class DeviceGroup(models.BaseModel):
+class DeviceGroup(BaseModel):
     """
     Description: Model Description
     """
@@ -24,8 +24,11 @@ class DeviceGroup(models.BaseModel):
         verbose_name = 'Device Group'
         verbose_name_plural = 'Device Groups'
 
+    def __str__(self):
+        return self.name
 
-class Device(models.BaseModel):
+
+class Device(BaseModel):
     name = models.CharField(_('Name'), max_length=255)
     ip = models.CharField(_('IP Address'), max_length=255)
     ROLES = [
@@ -35,12 +38,17 @@ class Device(models.BaseModel):
     ]
     role = models.CharField(max_length=10, choices=ROLES, default='NA')
     parent_device = models.ForeignKey(
-        Device, blank=True,
+        'self', blank=True,
         null=True,
-        related_name='parent_device',
+        related_name='children',
         on_delete=models.SET_NULL)
+    group = models.ForeignKey(DeviceGroup, blank=True, null=True,
+                              related_name='devices', on_delete=models.SET_NULL)
 
     class Meta:
         db_table = 'devices'
         verbose_name = 'Device'
         verbose_name_plural = 'Devices'
+
+    def __str__(self):
+        return self.name
