@@ -1,0 +1,31 @@
+Format: 1.8
+Date: Mon, 03 May 2021 10:43:51 +0700
+Source: report
+Binary: report
+Architecture: source amd64
+Version: 1.0.0
+Distribution: unstable
+Urgency: medium
+Maintainer: Nam Nguyen <nguyenhoainam@ioit.ac.vn>
+Changed-By: Nam Nguyen <nguyenhoainam@ioit.ac.vn>
+Description:
+ report     - <insert up to 60 chars description>
+Changes:
+ report (1.0.0) unstable; urgency=medium
+ .
+   * Initial Release.
+Checksums-Sha1:
+ d384939466fd3ab742ae393140b8d482220f333f 557 report_1.0.0.dsc
+ 35b895ec969c95a90b367cd1bde50b81709e4064 7292 report_1.0.0.tar.xz
+ deed8dfb9a5794447ec99fd9fc270738e0242938 5583 report_1.0.0_amd64.buildinfo
+ 1604c3e61465c15a50ade71d16495cb687f7dff4 2188 report_1.0.0_amd64.deb
+Checksums-Sha256:
+ 04e1b1b4313843bd89a73fa25e6989a6a2ef5d4fa17c41f392d85a98df020044 557 report_1.0.0.dsc
+ c5b5297f51c8d697e0cb445259c65e0094cec86acf08f252ec5ad946851be43b 7292 report_1.0.0.tar.xz
+ d129fdf7f2c679bfc17e223da9aa3d0601e09e85b18e333227663bbee79a5a04 5583 report_1.0.0_amd64.buildinfo
+ cad39ff963116fda4cf08131e248208809fffec434f8a1d24d06dfc71edef16b 2188 report_1.0.0_amd64.deb
+Files:
+ c1caefa13888de89903810ae10275447 557 unknown optional report_1.0.0.dsc
+ 52fbefd726442258f3a770de17badf6f 7292 unknown optional report_1.0.0.tar.xz
+ 0261fbb3eb1da0f3602418b8e8f6fa14 5583 unknown optional report_1.0.0_amd64.buildinfo
+ ed191b59b9fc65c9cb0876a3362c1aca 2188 unknown optional report_1.0.0_amd64.deb
