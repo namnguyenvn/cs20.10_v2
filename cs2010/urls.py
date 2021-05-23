@@ -19,6 +19,6 @@ from django.urls import path, include
 admin.site.site_header = 'IoT Update'
 
 urlpatterns = [
-    path('', admin.site.urls),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    path('admin/', admin.site.urls)
 ]
