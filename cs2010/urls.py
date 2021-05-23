@@ -20,5 +20,5 @@ admin.site.site_header = 'IoT Update'
 
 urlpatterns = [
     path('', admin.site.urls),
-    path('api', api.urls)
+    path('api/', include('api.urls'))
 ]
