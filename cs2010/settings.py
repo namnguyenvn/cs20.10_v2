@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'iotupdate',
+    'blockchain',
+    'gitupdate',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +133,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
