@@ -152,7 +152,7 @@ class Blockchain:
         :param last_block: <dict> last Block
         :return: <int>
         """
-
+        print(last_block)
         last_proof = last_block['proof']
         last_hash = self.hash(last_block)
 

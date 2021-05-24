@@ -53,7 +53,7 @@ class MineAPIView(APIView):
     def get(self, request):
         last_block = blockchain.last_block
         last_proof = last_block['proof']
-        proof = blockchain.proof_of_work(last_proof)
+        proof = blockchain.proof_of_work(last_block)
 
         blockchain.new_transaction(
             device=None,
