@@ -19,3 +19,5 @@ django-cors-headers
 drf-yasg
 python-social-auth
 social-auth-app-django
+setuptools
+twine
