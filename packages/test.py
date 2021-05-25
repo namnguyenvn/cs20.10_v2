@@ -1,3 +1,3 @@
-from rollback import test_rollback
+from hardware_state import state
 
-test_rollback()
+state()
