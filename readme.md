@@ -25,3 +25,8 @@ dpkg-buildpackage
 
 # create python package
 https://projects.raspberrypi.org/en/projects/packaging-your-code
+
+## build package
+```
+python3 setup.py sdist
+```
