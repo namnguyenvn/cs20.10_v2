@@ -21,3 +21,5 @@ python-social-auth
 social-auth-app-django
 setuptools
 twine
+build
+guizero
