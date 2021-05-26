@@ -3,7 +3,7 @@ from setuptools import setup
 __project__ = "Hardware State"
 __version__ = "0.0.1"
 __description__ = "a Python module to that needs to be rolled back"
-__packages__ = ["hardware_state"]
+__packages__ = ["hardware_state", "pi_temp"]
 __author__ = "Nam Nguyen Hoai"
 __author_email__ = "nguyenhoainam@ioit.ac.vn"
 __classifiers__ = [
