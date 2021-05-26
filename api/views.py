@@ -111,3 +111,9 @@ class NodeResolveAPIView(APIView):
                                 'message': 'Chain is authoritative',
                                 'chain': blockchain.chain
                                 }, status=200)
+
+
+class DeviceTempAPIView(APIView):
+    def post(self, request):
+        pass
+        # temp_info=

@@ -52,3 +52,17 @@ class Device(BaseModel):
 
     def __str__(self):
         return self.name
+
+
+class DeviceTemp(models.Model):
+
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+    temp = models.CharField(_('Temp'), max_length=255)
+    timestamp = models.CharField(_('Timestamp'), max_length=255)
+
+    class Meta:
+        verbose_name = _("Device Temp")
+        verbose_name_plural = _("Device Temps")
+
+    def __str__(self):
+        return self.device.name
