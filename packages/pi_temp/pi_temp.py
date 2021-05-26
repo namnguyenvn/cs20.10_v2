@@ -30,8 +30,8 @@ def temp():
 
         print(str(current_time) + " - " + str(temp))
 
-        url = 'http://' + config.get("server", "dev_server_address") + \
-            '/api/device-temp'
+        url = 'http://' + config.get("server", "central_server_address") + \
+            ':8000/api/device-temp'
 
         data = {
             'device_ip': config.get("device", "device_ip"),
