@@ -12,6 +12,7 @@ admin.site.register(DeviceGroup, DeviceGroupAdmin)
 class DeviceAdmin(admin.ModelAdmin):
     list_display = ('name', 'role', 'ip', 'parent_device',
                     'created_at', 'updated_at')
+    list_filter = ['role', 'ip', 'parent_device']
 
 
 admin.site.register(Device, DeviceAdmin)
@@ -19,6 +20,7 @@ admin.site.register(Device, DeviceAdmin)
 
 class DeviceTempAdmin(admin.ModelAdmin):
     list_display = ('device', 'temp', 'timestamp')
+    list_filter = ['device']
 
 
 admin.site.register(DeviceTemp, DeviceTempAdmin)
