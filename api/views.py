@@ -33,6 +33,8 @@ from blockchain.blockchain import Blockchain
 
 from api.serializers import *
 
+from iotupdate.models import *
+
 blockchain = Blockchain()
 
 node_identifier = str(uuid4()).replace('-', '')
@@ -115,5 +117,20 @@ class NodeResolveAPIView(APIView):
 
 class DeviceTempAPIView(APIView):
     def post(self, request):
-        pass
-        # temp_info=
+        try:
+            device_id = request.data['device_ip']
+            temp = request.data['temp']
+            timestamp = request.data['timestamp']
+            device = Device.objects.get(ip=device_id)
+            device_temp = DeviceTemp.objects.create(
+                device=device,
+                temp=temp,
+                timestamp=timestamp
+            )
+            return JsonResponse({'message': DeviceTempSerializer(device_temp).data}, status=201)
+        except Device.DoesNotExist as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=400)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=500)

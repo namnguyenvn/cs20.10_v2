@@ -26,4 +26,4 @@ def state():
 
         print(str(current_time) + " - " + str(float(current_temp) / 1000))
 
-        time.sleep(3)
+        time.sleep(5)

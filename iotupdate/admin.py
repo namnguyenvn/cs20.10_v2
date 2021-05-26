@@ -10,7 +10,7 @@ admin.site.register(DeviceGroup, DeviceGroupAdmin)
 
 
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'role', 'parent_device',
+    list_display = ('name', 'role', 'ip', 'parent_device',
                     'created_at', 'updated_at')
 
 

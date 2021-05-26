@@ -13,5 +13,6 @@ urlpatterns = [
     path('mine', views.MineAPIView.as_view(), name='mine'),
     path('full-chain', views.FullChainAPIView.as_view(), name='full-chain'),
     path('nodes/register', views.NodeRegisterAPIView.as_view(), name='node-register'),
-    path('nodes/resolve', views.NodeResolveAPIView.as_view(), name='node-resolve')
+    path('nodes/resolve', views.NodeResolveAPIView.as_view(), name='node-resolve'),
+    path('device-temp', views.DeviceTempAPIView.as_view(), name='device-temp')
 ]
