@@ -11,6 +11,8 @@ sense = SenseHat()
 
 
 def temp():
+    """ Get temp and post to server
+    """
     path_current_directory = os.path.dirname(__file__)
     path_config_file = os.path.join(
         path_current_directory, 'configuration', 'config.ini')
@@ -24,13 +26,15 @@ def temp():
         print(gateway + ': ' + gateway_address)
 
     while(True):
+        """send data to central server
+        """
         current_time = datetime.datetime.now()
 
         temp = sense.temp
 
         print(str(current_time) + " - " + str(temp))
 
-        url = 'http://' + config.get("server", "central_server_address") + \
+        device_temp_url = 'http://' + config.get("server", "central_server_address") + \
             ':8000/api/device-temp'
 
         data = {
@@ -39,8 +43,20 @@ def temp():
             'timestamp': current_time
         }
 
-        x = requests.post(url, data=data)
+        x = requests.post(device_temp_url, data=data)
 
         print(x.status_code)
+
+        """check command from server
+        """
+        central_server_command_url = 'http://' + \
+            config.get("server", "central_server_address") + \
+            ':8000/api/central-server-command'
+        query = {
+            'device_ip': '127.0.0.1'
+        }
+        response = requests.get(central_server_command_url, params=query)
+        if response:
+            print(response.json)
 
         time.sleep(3)

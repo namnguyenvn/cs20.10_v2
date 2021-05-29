@@ -24,3 +24,9 @@ class DeviceTempSerializer(serializers.ModelSerializer):
     class Meta:
         model = DeviceTemp
         fields = '__all__'
+
+
+class DeviceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Device
+        fields = '__all__'

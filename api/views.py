@@ -134,3 +134,19 @@ class DeviceTempAPIView(APIView):
         except Exception as e:
             print(e)
             return JsonResponse({'error': str(e)}, status=500)
+
+
+class CentralServerCommandAPIView(APIView):
+    def get(self, request):
+        try:
+            device_ip = request.data['device_ip']
+            device = Device.objects.get(pk=device_ip)
+            device_serializer = DeviceSerializer(device)
+            return JsonResponse({
+                'message': 'Rollback',
+                'rollback': True,
+                'device': device_serializer.data
+            }, status=200)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=500)
