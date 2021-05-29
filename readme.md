@@ -33,3 +33,18 @@ python3 setup.py sdist
 
 # SenseHat Emulator
 https://sense-emu.readthedocs.io/en/v1.1/install.html
+
+# generate ssh keys
+```
+ssh-keygen -t rsa
+```
+
+
+```
+Enter file in which to save the key (/home/namnguyen/.ssh/id_rsa): /home/namnguyen/django/cs20.10_v2/packages/pi_temp/configuration/ssh_keys/device1
+```
+
+# set remote origin
+```
+git remote set-url origin ubuntu@git.namnguyenhoai.com-device1:/home/ubuntu/git-update-versions.git
+```
