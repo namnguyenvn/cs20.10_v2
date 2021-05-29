@@ -139,7 +139,7 @@ class DeviceTempAPIView(APIView):
 class CentralServerCommandAPIView(APIView):
     def get(self, request):
         try:
-            device_ip = request.data['device_ip']
+            device_ip = request.query_params['device_ip']
             device = Device.objects.get(pk=device_ip)
             device_serializer = DeviceSerializer(device)
             return JsonResponse({

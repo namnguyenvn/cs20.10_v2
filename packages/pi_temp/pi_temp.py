@@ -56,7 +56,6 @@ def temp():
             'device_ip': '127.0.0.1'
         }
         response = requests.get(central_server_command_url, params=query)
-        if response:
-            print(response.json)
+        print(response.json())
 
         time.sleep(3)
