@@ -65,3 +65,9 @@ Host git.namnguyenhoai.com-device1
   User device1
   IdentityFile ~/django/cs20.10_v2/packages/pi_temp/configuration/ssh_keys/device1
 ```
+
+# install local package
+https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
+
+# execution time
+https://stackoverflow.com/questions/45492786/find-execution-time-for-subprocess-popen-python
