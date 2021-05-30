@@ -47,17 +47,4 @@ def temp():
 
         print(x.status_code)
 
-        """check command from server
-        """
-        central_server_command_url = 'http://' + \
-            config.get("server", "central_server_address") + \
-            ':8000/api/central-server-command'
-        query = {
-            'device_ip': '127.0.0.1'
-        }
-        response = requests.get(central_server_command_url, params=query)
-        data = response.json()
-        if data['rollback'] is True:
-            print('Needs to rollback')
-
         time.sleep(3)
