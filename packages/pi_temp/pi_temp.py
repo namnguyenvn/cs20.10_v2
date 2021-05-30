@@ -56,6 +56,8 @@ def temp():
             'device_ip': '127.0.0.1'
         }
         response = requests.get(central_server_command_url, params=query)
-        print(response.json())
+        data = response.json()
+        if data['rollback'] is True:
+            print('Needs to rollback')
 
         time.sleep(3)
