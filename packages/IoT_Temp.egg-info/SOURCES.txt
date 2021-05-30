@@ -1,0 +1,7 @@
+setup.py
+IoT_Temp.egg-info/PKG-INFO
+IoT_Temp.egg-info/SOURCES.txt
+IoT_Temp.egg-info/dependency_links.txt
+IoT_Temp.egg-info/top_level.txt
+pi_temp/__init__.py
+pi_temp/pi_temp.py

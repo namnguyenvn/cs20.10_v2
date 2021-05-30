@@ -17,6 +17,7 @@ while(True):
     data = response.json()
     if data['rollback'] is True:
         print('Needs to rollback')
+
     else:
         print('No need to rollback')
     time.sleep(3)
