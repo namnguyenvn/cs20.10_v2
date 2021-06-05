@@ -23,7 +23,7 @@ while(loop):
         cmd = 'git reset --hard'
         start_time = time.time()
         result = subprocess.run(
-            ['git', 'reset', '--hard'], stdout=subprocess.PIPE, cwd='/home/namnguyen/django/rollback-client')
+            ['git', 'reset', '--hard', 'HEAD^1'], stdout=subprocess.PIPE, cwd='/home/namnguyen/django/rollback-client')
         end_time = time.time()
         print(result.stdout)
         execute_time = end_time - start_time
