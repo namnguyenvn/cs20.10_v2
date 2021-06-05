@@ -16,5 +16,6 @@ urlpatterns = [
     path('nodes/resolve', views.NodeResolveAPIView.as_view(), name='node-resolve'),
     path('device-temp', views.DeviceTempAPIView.as_view(), name='device-temp'),
     path('central-server-command', views.CentralServerCommandAPIView.as_view(),
-         name='central-server-command')
+         name='central-server-command'),
+    path('rollback-log', views.RollbackLogAPIView.as_view(), name='rollback-log')
 ]

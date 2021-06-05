@@ -8,6 +8,8 @@ import subprocess
 
 print('Start checking rollback command')
 loop = True
+#log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
+log_url = 'http://127.0.0.1:8000/api/rollback-log'
 while(loop):
     """check command from server
             """
@@ -28,6 +30,12 @@ while(loop):
         print(result.stdout)
         execute_time = end_time - start_time
         print('Execute time: ' + str(execute_time))
+        log_request = requests.post(log_url, {
+            'device': 1,
+            'detail': 'device 1',
+            'time_execution': execute_time
+        })
+        print(log_request.text)
         loop = False
     else:
         print('No need to rollback')

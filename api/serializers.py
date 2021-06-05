@@ -30,3 +30,9 @@ class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
         fields = '__all__'
+
+
+class RollbackLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RollbackLog
+        fields = '__all__'

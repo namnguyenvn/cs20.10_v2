@@ -151,3 +151,20 @@ class CentralServerCommandAPIView(APIView):
         except Exception as e:
             print(e)
             return JsonResponse({'error': str(e)}, status=500)
+
+
+class RollbackLogAPIView(APIView):
+    def post(self, request):
+        try:
+            device = Device.objects.get(pk=request.data['device'])
+            detail = request.data['detail']
+            time_execution = request.data['time_execution']
+            rollback_log = RollbackLog.objects.create(
+                device=device,
+                detail=detail,
+                time_execution=time_execution
+            )
+            return JsonResponse({'log': RollbackLogSerializer(rollback_log).data}, status=201)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=500)
