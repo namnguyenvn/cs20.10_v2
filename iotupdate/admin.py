@@ -27,8 +27,8 @@ admin.site.register(DeviceTemp, DeviceTempAdmin)
 
 
 class RollbackLogAdmin(admin.ModelAdmin):
-    list_display = ('device', 'detail', 'time_execution', 'created_at')
-    list_filter = ['device', 'created_at']
+    list_display = ('type', 'detail', 'time_execution', 'created_at')
+    list_filter = ['type', 'created_at']
 
 
 admin.site.register(RollbackLog, RollbackLogAdmin)

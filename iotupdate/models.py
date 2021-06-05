@@ -69,9 +69,9 @@ class DeviceTemp(models.Model):
 
 
 class RollbackLog(models.Model):
-
-    device = models.ForeignKey(
-        Device, on_delete=models.CASCADE, related_name='rollback_logs')
+    type = models.CharField(_('Type'), max_length=255)
+    # device = models.ForeignKey(
+    #     Device, on_delete=models.CASCADE, related_name='rollback_logs', null=True, blank=True)
     detail = models.TextField(_('Detail'), null=True, blank=True)
     time_execution = models.FloatField(
         _('Time Execution'), null=True, blank=True)
@@ -83,4 +83,4 @@ class RollbackLog(models.Model):
         verbose_name_plural = _("Rollback Logs")
 
     def __str__(self):
-        return self.device.name
+        return self.type

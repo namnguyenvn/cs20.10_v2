@@ -156,11 +156,11 @@ class CentralServerCommandAPIView(APIView):
 class RollbackLogAPIView(APIView):
     def post(self, request):
         try:
-            device = Device.objects.get(pk=request.data['device'])
+            type = request.data['type']
             detail = request.data['detail']
             time_execution = request.data['time_execution']
             rollback_log = RollbackLog.objects.create(
-                device=device,
+                type=type,
                 detail=detail,
                 time_execution=time_execution
             )
