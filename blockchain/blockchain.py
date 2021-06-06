@@ -2,6 +2,8 @@ import hashlib
 import json
 from time import time
 from urllib.parse import urlparse
+import requests
+from django.conf import settings
 
 
 class Blockchain:
@@ -48,9 +50,13 @@ class Blockchain:
             if block['previous_hash'] != last_block_hash:
                 return False
 
-            # Check that the Proof of Work is correct
-            if not self.valid_proof(last_block['proof'], block['proof'], last_block_hash):
-                return False
+            # Check that the Proof of Authority is correct
+            # if not self.valid_proof(last_block['proof'], block['proof'], last_block_hash):
+            #     return False
+            trusted_hosts = settings.TRUSTED_HOSTS
+            for trusted_host in trusted_hosts:
+                if self.hash(trusted_host) != last_block['proor']:
+                    return False
 
             last_block = block
             current_index += 1
@@ -112,7 +118,7 @@ class Blockchain:
         self.chain.append(block)
         return block
 
-    def new_transaction(self, device, version, data):
+    def new_transaction(self, device, version, hash):
         """
         Creates a new transaction to go into the next mined Block
         :param sender: Address of the Sender
@@ -123,7 +129,7 @@ class Blockchain:
         self.current_transactions.append({
             'device': device,
             'version': version,
-            'data': data
+            'hash': hash
         })
 
         return self.last_block['index'] + 1
@@ -143,35 +149,38 @@ class Blockchain:
         block_string = json.dumps(block, sort_keys=True).encode()
         return hashlib.sha256(block_string).hexdigest()
 
-    def proof_of_work(self, last_block):
-        """
-        Simple Proof of Work Algorithm:
-         - Find a number p' such that hash(pp') contains leading 4 zeroes
-         - Where p is the previous proof, and p' is the new proof
+    def proof_of_authentication(self, node_address):
+        if self.valid_proof(node_address):
+            return self.hash(node_address)
+        return None
 
-        :param last_block: <dict> last Block
-        :return: <int>
-        """
-        print(last_block)
-        last_proof = last_block['proof']
-        last_hash = self.hash(last_block)
+    # def proof_of_work(self, last_block):
+    #     """
+    #     Simple Proof of Work Algorithm:
+    #      - Find a number p' such that hash(pp') contains leading 4 zeroes
+    #      - Where p is the previous proof, and p' is the new proof
 
-        proof = 0
-        while self.valid_proof(last_proof, proof, last_hash) is False:
-            proof += 1
+    #     :param last_block: <dict> last Block
+    #     :return: <int>
+    #     """
+    #     print(last_block)
+    #     last_proof = last_block['proof']
+    #     last_hash = self.hash(last_block)
 
-        return proof
+    #     proof = 0
+    #     while self.valid_proof(last_proof, proof, last_hash) is False:
+    #         proof += 1
+
+    #     return proof
 
     @staticmethod
-    def valid_proof(last_proof, proof, last_hash):
-        """
-        Validates the Proof
-        :param last_proof: <int> Previous Proof
-        :param proof: <int> Current Proof
-        :param last_hash: <str> The hash of the Previous Block
-        :return: <bool> True if correct, False if not.
-        """
-
-        guess = f'{last_proof}{proof}{last_hash}'.encode()
-        guess_hash = hashlib.sha256(guess).hexdigest()
-        return guess_hash[:4] == "0000"
+    def valid_proof(node_address):
+        trusted_hosts = settings.TRUSTED_HOSTS
+        print(trusted_hosts)
+        for trusted_host in trusted_hosts:
+            if str(node_address) == trusted_host:
+                return True
+        return False
+        # guess = f'{last_proof}{proof}{last_hash}'.encode()
+        # guess_hash = hashlib.sha256(guess).hexdigest()
+        # return guess_hash[:4] == "0000"

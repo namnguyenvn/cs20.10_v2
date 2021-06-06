@@ -3,7 +3,8 @@ import json
 from textwrap import dedent
 from time import time
 from uuid import uuid4
-
+from django.conf import settings
+from urllib.parse import urlparse
 
 from django.core import paginator
 from django.shortcuts import render
@@ -45,7 +46,7 @@ class TransactionAPIView(APIView):
         serializer = TransactionSerializer(data=request.data)
         if serializer.is_valid():
             index = blockchain.new_transaction(
-                request.data['device'], request.data['version'], request.data['data'])
+                request.data['device'], request.data['version'], request.data['hash'])
             return JsonResponse({'message': f'Update block added {index}'}, status=201)
         else:
             return JsonResponse({'message': serializer.errors}, status=400)
@@ -53,26 +54,33 @@ class TransactionAPIView(APIView):
 
 class MineAPIView(APIView):
     def get(self, request):
+        node_address = request.query_params.get('node_address')
+        print(node_address)
         last_block = blockchain.last_block
-        last_proof = last_block['proof']
-        proof = blockchain.proof_of_work(last_block)
+        # last_proof = last_block['proof']
+        # proof = blockchain.proof_of_work(last_block)
+        proof = blockchain.proof_of_authentication(node_address)
 
-        blockchain.new_transaction(
-            device=None,
-            version=None,
-            data=None
-        )
+        # blockchain.new_transaction(
+        #     device=None,
+        #     version=None,
+        #     data=None
+        # )
 
-        previous_hash = blockchain.hash(last_block)
-        block = blockchain.new_block(proof, previous_hash)
+        if proof is not None:
+            previous_hash = blockchain.hash(last_block)
+            block = blockchain.new_block(proof, previous_hash)
 
+            return JsonResponse({
+                'message': 'New block mined',
+                'index': block['index'],
+                'transactions': block['transactions'],
+                'proof': block['proof'],
+                'previous_hash': block['previous_hash']
+            }, status=200)
         return JsonResponse({
-            'message': 'New block mined',
-            'index': block['index'],
-            'transactions': block['transactions'],
-            'proof': block['proof'],
-            'previous_hash': block['previous_hash']
-        }, status=200)
+            'error': 'invalid proof'
+        }, status=400)
 
 
 class FullChainAPIView(APIView):
@@ -90,8 +98,13 @@ class NodeRegisterAPIView(APIView):
         if nodes is None:
             return JsonResponse({'message': 'Invalid Node List'}, status=400)
 
+        trusted_hosts = settings.TRUSTED_HOSTS
+
         for node in nodes:
-            blockchain.register_node(node)
+            for trusted_host in trusted_hosts:
+                parsed_url = urlparse(node)
+                if str(parsed_url.netloc) == trusted_host:
+                    blockchain.register_node(node)
 
         return JsonResponse({
             'message': 'New nodes added',

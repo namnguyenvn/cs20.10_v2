@@ -17,7 +17,7 @@ from iotupdate.models import *
 class TransactionSerializer(serializers.Serializer):
     device = serializers.CharField()
     version = serializers.CharField()
-    data = serializers.CharField()
+    hash = serializers.CharField()
 
 
 class DeviceTempSerializer(serializers.ModelSerializer):

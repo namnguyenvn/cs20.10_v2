@@ -32,3 +32,11 @@ class RollbackLogAdmin(admin.ModelAdmin):
 
 
 admin.site.register(RollbackLog, RollbackLogAdmin)
+
+
+class PackageVersionAdmin(admin.ModelAdmin):
+    list_display = ('device', 'version', 'file_hash')
+    list_filter = ['device']
+
+
+admin.site.register(PackageVersion, PackageVersionAdmin)

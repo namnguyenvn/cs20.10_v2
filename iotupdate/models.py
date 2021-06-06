@@ -84,3 +84,18 @@ class RollbackLog(models.Model):
 
     def __str__(self):
         return self.type
+
+
+class PackageVersion(models.Model):
+
+    device = models.CharField(_('Device'), max_length=255)
+    version = models.CharField(_('Version'), max_length=255)
+    file = models.FileField(upload_to='file-versions')
+    file_hash = models.CharField(_('File Hash'), max_length=255)
+
+    class Meta:
+        verbose_name = _("Package Version")
+        verbose_name_plural = _("Package Versions")
+
+    def __str__(self):
+        return self.device
