@@ -8,8 +8,7 @@ import subprocess
 
 print('Start checking rollback command')
 loop = 0
-#log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
-log_url = 'http://127.0.0.1:8000/api/rollback-log'
+log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
 while loop < 20000:
     """check command from server
             """
