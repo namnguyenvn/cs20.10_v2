@@ -24,3 +24,4 @@ twine
 build
 guizero
 sense_emu
+cryptography==2.8
