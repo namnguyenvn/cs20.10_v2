@@ -10,7 +10,7 @@ print('Start checking rollback command')
 loop = 0
 #log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
 log_url = 'http://127.0.0.1:8000/api/rollback-log'
-while loop < 10000:
+while loop < 20000:
     """check command from server
             """
     central_server_command_url = 'http://iot.namnguyenhoai.com:8000/api/central-server-command'
