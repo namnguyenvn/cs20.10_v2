@@ -9,7 +9,7 @@ import subprocess
 print('Start checking rollback command')
 loop = 0
 log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
-while loop < 20000:
+while loop < 1000:
     """check command from server
             """
     central_server_command_url = 'http://iot.namnguyenhoai.com:8000/api/central-server-command'
