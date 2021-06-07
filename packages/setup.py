@@ -27,6 +27,6 @@ setup(
     requires=__requires__,
     include_package_data=True,
     package_dir={'pi_temp': 'pi_temp'},
-    package_data=__package_data__
-    # data_files=['configuration']
+    # package_data=__package_data__
+    data_files=[('configuration', ['configuration/config.ini'])]
 )

@@ -1,4 +1,5 @@
 setup.py
+configuration/config.ini
 pi_temp/__init__.py
 pi_temp/pi_temp.py
 pi_temp.egg-info/PKG-INFO
