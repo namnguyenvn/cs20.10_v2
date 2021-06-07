@@ -34,6 +34,10 @@ https://projects.raspberrypi.org/en/projects/packaging-your-code
 python3 setup.py sdist
 ```
 
+add package data: 
+https://docs.python.org/3/distutils/setupscript.html#distutils-installing-package-data
+https://docs.python.org/3/distutils/sourcedist.html#the-manifest-in-template
+
 # SenseHat Emulator
 
 https://sense-emu.readthedocs.io/en/v1.1/install.html

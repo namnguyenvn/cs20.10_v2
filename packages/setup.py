@@ -1,7 +1,7 @@
 from setuptools import setup
 
-__project__ = "IoT Temp"
-__version__ = "0.0.1"
+__project__ = "pi_temp"
+__version__ = "0.0.2"
 __description__ = "a Python module to that needs to be rolled back"
 __packages__ = ["pi_temp"]
 __author__ = "Nam Nguyen Hoai"
@@ -13,6 +13,7 @@ __classifiers__ = [
 ]
 __keywords__ = ["rollback", "iot"]
 __requires__ = ["guizero", "wmi", "sense_emu"]
+__package_data__ = {'': ['configuration/*']}
 
 setup(
     name=__project__,
@@ -23,5 +24,9 @@ setup(
     author_email=__author_email__,
     classifiers=__classifiers__,
     keywords=__keywords__,
-    requires=__requires__
+    requires=__requires__,
+    include_package_data=True,
+    package_dir={'pi_temp': 'pi_temp'},
+    package_data=__package_data__
+    # data_files=['configuration']
 )

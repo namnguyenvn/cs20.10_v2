@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: iot-temp
+Version: 0.0.1
+Summary: a Python module to that needs to be rolled back
+Home-page: UNKNOWN
+Author: Nam Nguyen Hoai
+Author-email: nguyenhoainam@ioit.ac.vn
+License: UNKNOWN
+Description: UNKNOWN
+Keywords: rollback,iot
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Research
+Classifier: Programming Language :: Python :: 3
+Requires: guizero
+Requires: wmi
+Requires: sense_emu

@@ -1,3 +1,4 @@
+setup.cfg
 setup.py
 IoT_Temp.egg-info/PKG-INFO
 IoT_Temp.egg-info/SOURCES.txt
