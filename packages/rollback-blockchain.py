@@ -20,38 +20,8 @@ while loop < 5000:
     response = requests.get(central_server_command_url, params=query)
     data = response.json()
     if data['rollback'] is True:
-        print('Start revert')
-        timeout_in_second = 1
-        cmd = 'git reset --hard'
-        revert_start_time = time.time()
-        result = subprocess.run(
-            ['git', 'reset', '--hard', 'HEAD^1'], stdout=subprocess.PIPE, cwd='/home/namnguyen/django/rollback-client')
-        revert_end_time = time.time()
-        print(result.stdout)
-        revert_execute_time = revert_end_time - revert_start_time
-        print('Revert time: ' + str(revert_execute_time))
-        revert_log_request = requests.post(log_url, {
-            'type': 'git revert',
-            'detail': result.stdout,
-            'time_execution': revert_execute_time
-        })
-        print(revert_log_request.text)
-        # pull new code
-        print('Start pull')
-        pull_start_time = time.time()
-        result = subprocess.run(['git', 'pull', 'origin', 'device1'],
-                                stdout=subprocess.PIPE, cwd='/home/namnguyen/django/rollback-client')
-        pull_end_time = time.time()
-        pull_execution_time = pull_end_time - pull_start_time
-        print('Pull time: ' + str(pull_execution_time))
-        pull_log_request = requests.post(log_url, {
-            'type': 'git pull',
-            'detail': result.stdout,
-            'time_execution': pull_execution_time
-        })
-        print(pull_log_request.text)
-        loop += 1
-        print('Test No. ' + str(loop))
+        print('start rollback')
+        print('get rollback from blockchain')
     else:
         print('No need to rollback')
     time.sleep(3)
