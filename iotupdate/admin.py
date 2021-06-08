@@ -35,8 +35,8 @@ admin.site.register(RollbackLog, RollbackLogAdmin)
 
 
 class PackageVersionAdmin(admin.ModelAdmin):
-    list_display = ('device', 'version', 'file_hash')
-    list_filter = ['device']
+    list_display = ('device', 'version', 'file_hash', 'note', 'created_at')
+    list_filter = ['device', 'note']
 
 
 admin.site.register(PackageVersion, PackageVersionAdmin)

@@ -181,3 +181,35 @@ class RollbackLogAPIView(APIView):
         except Exception as e:
             print(e)
             return JsonResponse({'error': str(e)}, status=500)
+
+
+class PackageVersionAPIView(APIView):
+    def get(self, request):
+        try:
+            device = request.query_params.get('device')
+            version = request.query_params.get('version')
+            hash = request.query_params.get('hash')
+            package_version = PackageVersion.objects.get(
+                device=device, version=version, hash=hash)
+            package_version_serializer = PackageVersionSerializer(
+                package_version)
+            return JsonResponse({'version': package_version_serializer.data}, status=200)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=500)
+
+    def post(self, request):
+        try:
+            device = request.data['device']
+            version = request.data['version']
+            hash = request.data['hash']
+            file = request.data['file']
+            note = request.data['note']
+            package_version = PackageVersion.objects.create(
+                device=device, version=version, file_hash=hash, file=file, note=note)
+            package_version_serializer = PackageVersionSerializer(
+                package_version)
+            return JsonResponse({'version': package_version_serializer.data}, status=201)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=500)

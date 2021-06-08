@@ -17,5 +17,7 @@ urlpatterns = [
     path('device-temp', views.DeviceTempAPIView.as_view(), name='device-temp'),
     path('central-server-command', views.CentralServerCommandAPIView.as_view(),
          name='central-server-command'),
-    path('rollback-log', views.RollbackLogAPIView.as_view(), name='rollback-log')
+    path('rollback-log', views.RollbackLogAPIView.as_view(), name='rollback-log'),
+    path('package-version', views.PackageVersionAPIView.as_view(),
+         name='package_version')
 ]

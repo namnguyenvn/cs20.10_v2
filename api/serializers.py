@@ -36,3 +36,9 @@ class RollbackLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = RollbackLog
         fields = '__all__'
+
+
+class PackageVersionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackageVersion
+        fields = '__all__'

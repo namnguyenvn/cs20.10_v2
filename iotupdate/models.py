@@ -1,5 +1,5 @@
 from django.utils.translation import ugettext as _
-
+import hashlib
 from django.db import models
 
 
@@ -92,6 +92,9 @@ class PackageVersion(models.Model):
     version = models.CharField(_('Version'), max_length=255)
     file = models.FileField(upload_to='file-versions')
     file_hash = models.CharField(_('File Hash'), max_length=255)
+    note = models.CharField(_('Note'), max_length=255, null=True, blank=True)
+    created_at = models.DateTimeField(
+        _('Created at'), auto_now_add=True, null=True, blank=True)
 
     class Meta:
         verbose_name = _("Package Version")
