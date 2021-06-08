@@ -75,3 +75,8 @@ https://stackoverflow.com/questions/15031694/installing-python-packages-from-loc
 
 # execution time
 https://stackoverflow.com/questions/45492786/find-execution-time-for-subprocess-popen-python
+
+# install local package
+```
+pip install packages/dist/pi_temp-0.0.1.tar.gz
+```
