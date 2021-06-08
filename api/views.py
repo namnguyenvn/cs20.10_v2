@@ -1,4 +1,5 @@
 import hashlib
+import uuid
 import json
 from textwrap import dedent
 from time import time
@@ -44,9 +45,10 @@ node_identifier = str(uuid4()).replace('-', '')
 class TransactionAPIView(APIView):
     def post(self, request):
         serializer = TransactionSerializer(data=request.data)
+        tx_hash = uuid4()
         if serializer.is_valid():
             index = blockchain.new_transaction(
-                request.data['device'], request.data['version'], request.data['hash'])
+                tx_hash, request.data['device'], request.data['version'], request.data['hash'])
             return JsonResponse({'message': f'Update block added {index}'}, status=201)
         else:
             return JsonResponse({'message': serializer.errors}, status=400)
