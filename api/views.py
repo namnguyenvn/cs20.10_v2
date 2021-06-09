@@ -215,3 +215,23 @@ class PackageVersionAPIView(APIView):
         except Exception as e:
             print(e)
             return JsonResponse({'error': str(e)}, status=500)
+
+
+class TransactionSearchAPIView(APIView):
+    def get(self, request):
+        try:
+            device = request.query_params.get('device')
+            print(device)
+            version = request.query_params.get('version')
+            print(version)
+            chain = blockchain.chain
+            for item in chain:
+                transactions = item['transactions']
+                for transaction in transactions:
+                    print(transaction)
+                    if transaction['device'] == device and transaction['version'] == version:
+                        return JsonResponse(transaction, status=200)
+            return JsonResponse({'message': 'No transaction match'}, status=404)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=500)

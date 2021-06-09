@@ -1,6 +1,7 @@
 from django.utils.translation import ugettext as _
 import hashlib
 from django.db import models
+import uuid
 
 
 class BaseModel(models.Model):
@@ -91,6 +92,8 @@ class PackageVersion(models.Model):
     device = models.CharField(_('Device'), max_length=255)
     version = models.CharField(_('Version'), max_length=255)
     file = models.FileField(upload_to='file-versions')
+    tx_hash = models.CharField(
+        _('Tx Hash'), max_length=255, default=uuid.uuid4().hex)
     file_hash = models.CharField(_('File Hash'), max_length=255)
     note = models.CharField(_('Note'), max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(

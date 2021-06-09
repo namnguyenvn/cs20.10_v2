@@ -19,5 +19,7 @@ urlpatterns = [
          name='central-server-command'),
     path('rollback-log', views.RollbackLogAPIView.as_view(), name='rollback-log'),
     path('package-version', views.PackageVersionAPIView.as_view(),
-         name='package_version')
+         name='package_version'),
+    path('transaction-search', views.TransactionSearchAPIView.as_view(),
+         name='transaction-search')
 ]
