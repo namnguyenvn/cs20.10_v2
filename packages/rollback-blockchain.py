@@ -10,7 +10,7 @@ print('Start checking rollback command')
 loop = 0
 #log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
 log_url = 'http://127.0.0.1:8000/api/rollback-log'
-while loop < 5000:
+while loop < 1000:
     """check command from server
             """
     central_server_command_url = 'http://iot.namnguyenhoai.com:8000/api/central-server-command'
@@ -22,6 +22,7 @@ while loop < 5000:
     if data['rollback'] is True:
         print('start rollback')
         print('get rollback from blockchain')
+
     else:
         print('No need to rollback')
     time.sleep(3)

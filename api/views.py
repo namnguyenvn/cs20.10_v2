@@ -45,7 +45,7 @@ node_identifier = str(uuid4()).replace('-', '')
 class TransactionAPIView(APIView):
     def post(self, request):
         serializer = TransactionSerializer(data=request.data)
-        tx_hash = uuid4()
+        tx_hash = uuid4().hex
         if serializer.is_valid():
             index = blockchain.new_transaction(
                 tx_hash, request.data['device'], request.data['version'], request.data['hash'])
