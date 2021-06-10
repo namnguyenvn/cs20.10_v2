@@ -235,3 +235,33 @@ class TransactionSearchAPIView(APIView):
         except Exception as e:
             print(e)
             return JsonResponse({'error': str(e)}, status=500)
+
+
+class SeedBlockchainAPIView(APIView):
+    def post(self, request):
+        try:
+            transactions = [
+                {'tx_hash': '6a4c39085fde4f5d95be69c872781a29', 'device': 'Device 1',
+                    'version': '0.0.1', 'hash': 'c7d720641a8cba02cc2428379fd5970c'},
+                {'tx_hash': '6a4c39085fde4f5d95be69c872781a29', 'device': 'Device 1',
+                    'version': '0.0.2', 'hash': '44acf3c48938bfc43603ea1228643749'}
+            ]
+            # create transaction
+            for transaction in transactions:
+                new_transaction = blockchain.new_transaction(
+                    transaction['tx_hash'], transaction['device'], transaction['version'], transaction['hash'])
+                print(new_transaction)
+                # create node
+                node_address = request.data.get('node_address')
+                last_block = blockchain.last_block
+                proof = blockchain.proof_of_authentication(node_address)
+                previous_hash = blockchain.hash(last_block)
+                block = blockchain.new_block(proof, previous_hash)
+                print(block)
+            return JsonResponse({
+                'chain': blockchain.chain,
+                'length': len(blockchain.chain)
+            }, status=200)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=500)
