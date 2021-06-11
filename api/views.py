@@ -240,6 +240,29 @@ class TransactionSearchAPIView(APIView):
 class SeedBlockchainAPIView(APIView):
     def post(self, request):
         try:
+            dummy_transactions = []
+            for index in range(97):
+                device = 'Device ' + str(index)
+                version = '0.0.' + str(index)
+                dummy_transaction = {
+                    'tx_hash': uuid.uuid4().hex,
+                    'device': device,
+                    'version': version,
+                    'hash': uuid.uuid4().hex
+                }
+                dummy_transactions.append(dummy_transaction)
+
+            for dummy_transaction in dummy_transactions:
+                new_dummy_transaction = blockchain.new_transaction(
+                    dummy_transaction['tx_hash'], dummy_transaction['device'], dummy_transaction['version'], dummy_transaction['hash']
+                )
+                print(new_dummy_transaction)
+                node_address = '127.0.0.1'
+                last_block = blockchain.last_block
+                proof = blockchain.proof_of_authentication(node_address)
+                previous_hash = blockchain.hash(last_block)
+                block = blockchain.new_block(proof, previous_hash)
+                print(block)
             transactions = [
                 {'tx_hash': '6a4c39085fde4f5d95be69c872781a29', 'device': 'Device 1',
                     'version': '0.0.1', 'hash': 'c7d720641a8cba02cc2428379fd5970c'},
