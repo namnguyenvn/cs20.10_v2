@@ -22,12 +22,12 @@ while loop < 1000:
     query = {
         'device_ip': '127.0.0.1'
     }
-    rollback_start_time = time.time()
     response = requests.get(central_server_command_url, params=query)
     data = response.json()
     if data['rollback'] is True:
         print('start rollback')
         print('get info from blockchain')
+        rollback_start_time = time.time()
         transaction_query = {
             'device': 'Device 1',
             'version': '0.0.1'
@@ -51,26 +51,41 @@ while loop < 1000:
         # download file
         download_url = base_url + version['file']
         print(download_url)
-        download_request = requests.get(download_url, allow_redirects=True)
+        #download_request = requests.get(download_url, allow_redirects=True)
         filename = ''
         if download_url.find('/'):
             filename = '/tmp/' + download_url.rsplit('/', 1)[1]
-        open(filename, 'wb').write(download_request.content)
+        subprocess.run(['wget', download_url, '-O', '/tmp'])
+        # open(filename, 'wb').write(download_request.content)
         # check sum
         md5_downloaded_file = hashlib.md5(
             open(filename, 'rb').read()).hexdigest()
         if md5_downloaded_file == version['file_hash']:
             print('Same MD5')
+            # install file
+            print('Start install pip')
+            pip_install_result = subprocess.run(
+                ['pip', 'install', filename], stdout=subprocess.PIPE)
+            print(pip_install_result.stdout)
+            rollback_end_time = time.time()
+            execution_time = rollback_end_time - rollback_start_time
+            pull_log_request = requests.post(log_url, {
+                'type': '(dev) blockchain direct rollback',
+                'detail': pip_install_result.stdout,
+                'time_execution': execution_time
+            })
+            print(pull_log_request.text)
         else:
             print('Not same MD5')
             print(md5_downloaded_file)
             print(version['file_hash'])
-        # install file
-        # print('Start install pip')
-        # pip_install_result = subprocess.run(
-        #     ['pip', 'install', filename], stdout=subprocess.PIPE)
-        # print(pip_install_result.stdout)
-        loop = 1001
+        loop += 1
+        print('Test No. ' + str(loop))
+        # install new version
+        print('Start install pip')
+        pip_install_result = subprocess.run(
+            ['pip', 'install', '/tmp/pi_temp-0.0.2.tar.gz'], stdout=subprocess.PIPE)
+        print(pip_install_result.stdout)
     else:
         print('No need to rollback')
-    time.sleep(3)
+    time.sleep(1)
