@@ -81,7 +81,7 @@ while loop < 1000:
             print(version['file_hash'])
         loop += 1
         print('Test No. ' + str(loop))
-        # install new version
+        # install back the higher version
         print('Start install pip')
         pip_install_result = subprocess.run(
             ['pip', 'install', '/tmp/pi_temp-0.0.2.tar.gz'], stdout=subprocess.PIPE)
