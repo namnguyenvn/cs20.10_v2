@@ -190,9 +190,9 @@ class PackageVersionAPIView(APIView):
         try:
             device = request.query_params.get('device')
             version = request.query_params.get('version')
-            hash = request.query_params.get('hash')
+            hash = request.query_params.get('file_hash')
             package_version = PackageVersion.objects.get(
-                device=device, version=version, hash=hash)
+                device=device, version=version, file_hash=hash)
             package_version_serializer = PackageVersionSerializer(
                 package_version)
             return JsonResponse({'version': package_version_serializer.data}, status=200)
@@ -225,6 +225,7 @@ class TransactionSearchAPIView(APIView):
             version = request.query_params.get('version')
             print(version)
             chain = blockchain.chain
+            print(chain)
             for item in chain:
                 transactions = item['transactions']
                 for transaction in transactions:
@@ -241,20 +242,20 @@ class SeedBlockchainAPIView(APIView):
     def post(self, request):
         try:
             dummy_transactions = []
-            for index in range(97):
+            for index in range(3, 100):
                 device = 'Device ' + str(index)
                 version = '0.0.' + str(index)
                 dummy_transaction = {
                     'tx_hash': uuid.uuid4().hex,
                     'device': device,
                     'version': version,
-                    'hash': uuid.uuid4().hex
+                    'file_hash': uuid.uuid4().hex
                 }
                 dummy_transactions.append(dummy_transaction)
 
             for dummy_transaction in dummy_transactions:
                 new_dummy_transaction = blockchain.new_transaction(
-                    dummy_transaction['tx_hash'], dummy_transaction['device'], dummy_transaction['version'], dummy_transaction['hash']
+                    dummy_transaction['tx_hash'], dummy_transaction['device'], dummy_transaction['version'], dummy_transaction['file_hash']
                 )
                 print(new_dummy_transaction)
                 node_address = '127.0.0.1'
@@ -265,14 +266,14 @@ class SeedBlockchainAPIView(APIView):
                 print(block)
             transactions = [
                 {'tx_hash': '6a4c39085fde4f5d95be69c872781a29', 'device': 'Device 1',
-                    'version': '0.0.1', 'hash': 'c7d720641a8cba02cc2428379fd5970c'},
+                    'version': '0.0.1', 'file_hash': 'c7d720641a8cba02cc2428379fd5970c'},
                 {'tx_hash': '6a4c39085fde4f5d95be69c872781a29', 'device': 'Device 1',
-                    'version': '0.0.2', 'hash': '44acf3c48938bfc43603ea1228643749'}
+                    'version': '0.0.2', 'file_hash': '44acf3c48938bfc43603ea1228643749'}
             ]
             # create transaction
             for transaction in transactions:
                 new_transaction = blockchain.new_transaction(
-                    transaction['tx_hash'], transaction['device'], transaction['version'], transaction['hash'])
+                    transaction['tx_hash'], transaction['device'], transaction['version'], transaction['file_hash'])
                 print(new_transaction)
                 # create node
                 node_address = request.data.get('node_address')

@@ -118,7 +118,7 @@ class Blockchain:
         self.chain.append(block)
         return block
 
-    def new_transaction(self, tx_hash, device, version, hash):
+    def new_transaction(self, tx_hash, device, version, file_hash):
         """
         Creates a new transaction to go into the next mined Block
         :param sender: Address of the Sender
@@ -130,7 +130,7 @@ class Blockchain:
             'tx_hash': tx_hash,
             'device': device,
             'version': version,
-            'hash': hash
+            'file_hash': file_hash
         })
 
         return self.last_block['index'] + 1
