@@ -10,7 +10,7 @@ print('Start checking rollback command')
 loop = 0
 log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
 pi_git_path = '/home/pi/rollback-client'
-while loop < 1000:
+while loop < 10000:
     """check command from server
             """
     central_server_command_url = 'http://iot.namnguyenhoai.com:8000/api/central-server-command'
@@ -62,4 +62,4 @@ while loop < 1000:
         print('Test No. ' + str(loop))
     else:
         print('No need to rollback')
-    time.sleep(3)
+    time.sleep(1)
