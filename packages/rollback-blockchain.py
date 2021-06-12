@@ -6,6 +6,7 @@ import configparser
 import os
 import requests
 import subprocess
+import hashlib
 
 print('Start checking rollback command')
 loop = 0
@@ -13,7 +14,7 @@ loop = 0
 log_url = 'http://127.0.0.1:8000/api/rollback-log'
 transaction_url = 'http://127.0.0.1:8000/api/transaction-search'
 version_url = 'http://127.0.0.1:8000/api/package-version'
-base_url = 'http://127.0.0.1:8000/'
+base_url = 'http://127.0.0.1:8000'
 while loop < 1000:
     """check command from server
             """
@@ -49,10 +50,27 @@ while loop < 1000:
         print(version)
         # download file
         download_url = base_url + version['file']
+        print(download_url)
         download_request = requests.get(download_url, allow_redirects=True)
-        filename = 'file-versions' + \
-            version['device'] + '-' + version['version']
+        filename = ''
+        if download_url.find('/'):
+            filename = '/tmp/' + download_url.rsplit('/', 1)[1]
         open(filename, 'wb').write(download_request.content)
+        # check sum
+        md5_downloaded_file = hashlib.md5(
+            open(filename, 'rb').read()).hexdigest()
+        if md5_downloaded_file == version['file_hash']:
+            print('Same MD5')
+        else:
+            print('Not same MD5')
+            print(md5_downloaded_file)
+            print(version['file_hash'])
+        # install file
+        # print('Start install pip')
+        # pip_install_result = subprocess.run(
+        #     ['pip', 'install', filename], stdout=subprocess.PIPE)
+        # print(pip_install_result.stdout)
+        loop = 1001
     else:
         print('No need to rollback')
     time.sleep(3)
