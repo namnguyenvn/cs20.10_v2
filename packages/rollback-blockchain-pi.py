@@ -51,7 +51,7 @@ while loop < 10000:
         print('version_result')
         print(version)
         # download file
-        download_url = base_url + version['file']
+        download_url = dev_base_url + version['file']
         print(download_url)
         #download_request = requests.get(download_url, allow_redirects=True)
         filename = ''
