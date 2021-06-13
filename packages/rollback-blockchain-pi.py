@@ -57,7 +57,7 @@ while loop < 10000:
         filename = ''
         if download_url.find('/'):
             filename = '/tmp/' + download_url.rsplit('/', 1)[1]
-        subprocess.run(['wget', download_url, '-O', '/tmp'])
+        subprocess.run(['wget', download_url, '-O', filename])
         # open(filename, 'wb').write(download_request.content)
         # check sum
         md5_downloaded_file = hashlib.md5(
