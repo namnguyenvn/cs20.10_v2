@@ -62,4 +62,4 @@ while loop < 10000:
         print('Test No. ' + str(loop))
     else:
         print('No need to rollback')
-    time.sleep(1)
+    # time.sleep(1)

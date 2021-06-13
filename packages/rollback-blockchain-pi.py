@@ -90,4 +90,4 @@ while loop < 10000:
         print(pip_install_result.stdout)
     else:
         print('No need to rollback')
-    time.sleep(1)
+    # time.sleep(1)
