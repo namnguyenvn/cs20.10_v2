@@ -11,7 +11,7 @@ import hashlib
 print('Start checking rollback command')
 loop = 0
 base_url = 'http://127.0.0.1:8000'
-dev_base_url = 'http://iot.namnguyenhoai.com'
+dev_base_url = 'http://iot.namnguyenhoai.com:8000'
 #log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
 log_url = dev_base_url + '/api/rollback-log'
 transaction_url = dev_base_url + '/api/transaction-search'
