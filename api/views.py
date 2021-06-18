@@ -95,18 +95,23 @@ class FullChainAPIView(APIView):
 
 class NodeRegisterAPIView(APIView):
     def post(self, request):
-        nodes = request.data['nodes']
-
+        nodes = request.data.getlist('nodes[]')
+        print('nodes')
+        print(nodes)
         if nodes is None:
             return JsonResponse({'message': 'Invalid Node List'}, status=400)
 
         trusted_hosts = settings.TRUSTED_HOSTS
 
         for node in nodes:
+            print(node)
             for trusted_host in trusted_hosts:
                 parsed_url = urlparse(node)
-                if str(parsed_url.netloc) == trusted_host:
-                    blockchain.register_node(node)
+                print(parsed_url)
+                blockchain.register_node(node)
+                # if str(parsed_url.netloc) == trusted_host:
+                #     print('in trusted host')
+                #     blockchain.register_node(node)
 
         return JsonResponse({
             'message': 'New nodes added',
