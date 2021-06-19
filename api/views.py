@@ -294,3 +294,18 @@ class SeedBlockchainAPIView(APIView):
         except Exception as e:
             print(e)
             return JsonResponse({'error': str(e)}, status=500)
+
+
+class EmptyChainAPI(APIView):
+    def post(self, request):
+        try:
+            blockchain.__init__()
+            # blockchain.new_block(
+            #     previous_hash='1', proof=blockchain.hash('127.0.0.1:8000'))
+            return JsonResponse({
+                'chain': blockchain.chain,
+                'length': len(blockchain.chain)
+            }, status=200)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=500)

@@ -13,7 +13,8 @@ class Blockchain:
         self.nodes = set()
 
         # Create the genesis block
-        self.new_block(previous_hash='1', proof=self.hash('127.0.0.1'))
+        self.new_block(previous_hash='1',
+                       proof=self.proof_of_authentication('127.0.0.1'))
 
     def register_node(self, address):
         """
@@ -66,6 +67,7 @@ class Blockchain:
             # if check == False:
             #     return False
             if last_block['proof'] not in hash_trusted_hosts:
+                print(current_index)
                 print("last_block['proof']" + str(last_block['proof']))
                 print("last_block['proof'] not in hash_trusted_hosts")
                 return False
@@ -198,6 +200,7 @@ class Blockchain:
         for trusted_host in trusted_hosts:
             if str(node_address) == trusted_host:
                 return True
+        print(node_address)
         return False
         # guess = f'{last_proof}{proof}{last_hash}'.encode()
         # guess_hash = hashlib.sha256(guess).hexdigest()

@@ -22,5 +22,6 @@ urlpatterns = [
          name='package_version'),
     path('transaction-search', views.TransactionSearchAPIView.as_view(),
          name='transaction-search'),
-    path('seed', views.SeedBlockchainAPIView.as_view(), name='seed-blockchain')
+    path('seed', views.SeedBlockchainAPIView.as_view(), name='seed-blockchain'),
+    path('empty-chain', views.EmptyChainAPI.as_view(), name='empty-chain')
 ]
