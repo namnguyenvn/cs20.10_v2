@@ -80,3 +80,6 @@ https://stackoverflow.com/questions/45492786/find-execution-time-for-subprocess-
 ```
 pip install packages/dist/pi_temp-0.0.1.tar.gz
 ```
+
+# build private blockchain
+https://medium.com/@vanflymen/learn-blockchains-by-building-one-117428612f46

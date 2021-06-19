@@ -140,4 +140,5 @@ REST_FRAMEWORK = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-TRUSTED_HOSTS = ['127.0.0.1', 'iot.namnguyenhoai.com']
+TRUSTED_HOSTS = ['127.0.0.1', 'iot.namnguyenhoai.com',
+                 '127.0.0.1:5000', '127.0.0.1:8000']

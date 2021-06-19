@@ -13,7 +13,7 @@ class Blockchain:
         self.nodes = set()
 
         # Create the genesis block
-        self.new_block(previous_hash='1', proof=100)
+        self.new_block(previous_hash='1', proof=self.hash('127.0.0.1'))
 
     def register_node(self, address):
         """
@@ -31,33 +31,44 @@ class Blockchain:
             raise ValueError('Invalid URL')
 
     def valid_chain(self, chain):
-        """
-        Determine if a given blockchain is valid
-        :param chain: A blockchain
-        :return: True if valid, False if not
-        """
 
         last_block = chain[0]
         current_index = 1
 
+        trusted_hosts = settings.TRUSTED_HOSTS
+        hash_trusted_hosts = []
+        for trusted_host in trusted_hosts:
+            hash_trusted_hosts.append(self.hash(trusted_host))
+        print(hash_trusted_hosts)
+
         while current_index < len(chain):
             block = chain[current_index]
-            print(f'{last_block}')
-            print(f'{block}')
-            print("\n-----------\n")
+            # print(f'{last_block}')
+            # print(f'{block}')
+            # print("\n-----------\n")
             # Check that the hash of the block is correct
             last_block_hash = self.hash(last_block)
             if block['previous_hash'] != last_block_hash:
+                print("block['previous_hash'] != last_block_hash")
                 return False
 
             # Check that the Proof of Authority is correct
             # if not self.valid_proof(last_block['proof'], block['proof'], last_block_hash):
             #     return False
-            trusted_hosts = settings.TRUSTED_HOSTS
-            for trusted_host in trusted_hosts:
-                if self.hash(trusted_host) != last_block['proor']:
-                    return False
-
+            # trusted_hosts = settings.TRUSTED_HOSTS
+            # check = False
+            # for trusted_host in trusted_hosts:
+            #     print(str(trusted_host))
+            #     if self.hash(trusted_host) == last_block['proof']:
+            #         check = True
+            #         print('Check is True:' + str(trusted_host))
+            #         break
+            # if check == False:
+            #     return False
+            if last_block['proof'] not in hash_trusted_hosts:
+                print("last_block['proof']" + str(last_block['proof']))
+                print("last_block['proof'] not in hash_trusted_hosts")
+                return False
             last_block = block
             current_index += 1
 
@@ -78,10 +89,14 @@ class Blockchain:
 
         # Grab and verify the chains from all the nodes in our network
         for node in neighbours:
-            response = requests.get(f'http://{node}/full-chain')
+            print('node in neighbours')
+            print(node)
+            response = requests.get(f'http://{node}/api/full-chain')
+            print(response.status_code)
 
             if response.status_code == 200:
                 length = response.json()['length']
+                print('Length: ' + str(length))
                 chain = response.json()['chain']
 
                 # Check if the length is longer and the chain is valid
@@ -92,6 +107,8 @@ class Blockchain:
         # Replace our chain if we discovered a new, valid chain longer than ours
         if new_chain:
             self.chain = new_chain
+            print('New Chain')
+            print(self.chain)
             return True
 
         return False
