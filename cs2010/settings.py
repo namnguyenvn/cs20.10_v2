@@ -26,7 +26,7 @@ SECRET_KEY = '&_^6ot)tut3&!$d!b^)y-_5_u61fc@*qewf#k-%*66nx62&e@8'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
-                 '139.99.61.58', 'iot.namnguyenhoai.com', '127.0.0.1:8000', '127.0.0.1:5000', '3eef30606e39.ap.ngrok.io']
+                 '139.99.61.58', 'iot.namnguyenhoai.com', '127.0.0.1:8000', '127.0.0.1:5000', '3eef30606e39.ap.ngrok.io', '192.168.1.35']
 
 
 # Application definition
