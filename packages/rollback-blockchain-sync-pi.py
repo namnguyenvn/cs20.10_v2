@@ -11,10 +11,10 @@ import hashlib
 print('Start checking rollback command')
 loop = 0
 base_url = 'http://iot.namnguyenhoai.com:8000'
-node_base_url = 'http://3eef30606e39.ap.ngrok.io'
-node_base_domain = '3eef30606e39.ap.ngrok.io'
+node_base_url = 'http://192.168.1.35:8000'
+node_base_domain = '192.168.1.35:8000'
 log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
-#log_url = 'http://3eef30606e39.ap.ngrok.io/api/rollback-log'
+#log_url = 'http://192.168.1.35:8000/api/rollback-log'
 transaction_url = base_url + '/api/transaction-search'
 version_url = base_url + '/api/package-version'
 
