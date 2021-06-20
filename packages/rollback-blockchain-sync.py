@@ -16,9 +16,11 @@ transaction_url = 'http://127.0.0.1:8000/api/transaction-search'
 version_url = 'http://127.0.0.1:8000/api/package-version'
 base_url = 'http://127.0.0.1:8000'
 node_base_url = 'http://iot.namnguyenhoai.com:8000'
+local_base_package = '/home/namnguyen/django/cs20.10_v2/packages'
+pi_base_package = '/home/pi/cs20.10_v2/packages'
 # copy version 2 to update
 subprocess.run(['cp', 'dist/pi_temp-0.0.2.tar.gz',
-               '/tmp/pi_temp-0.0.2.tar.gz'], cwd='/home/namnguyen/django/cs20.10_v2/packages')
+               '/tmp/pi_temp-0.0.2.tar.gz'], cwd=pi_base_package)
 # seed the node
 seed_response = requests.post(
     node_base_url + '/api/seed', data={'node_address': '127.0.0.1'})
