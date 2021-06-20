@@ -11,16 +11,16 @@ import hashlib
 print('Start checking rollback command')
 loop = 0
 log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
-#log_url = 'http://127.0.0.1:8000/api/rollback-log'
-transaction_url = 'http://127.0.0.1:8000/api/transaction-search'
-version_url = 'http://127.0.0.1:8000/api/package-version'
-base_url = 'http://127.0.0.1:8000'
+#log_url = 'http://192.168.1.35:8000/api/rollback-log'
+transaction_url = 'http://192.168.1.35:8000/api/transaction-search'
+version_url = 'http://192.168.1.35:8000/api/package-version'
+base_url = 'http://192.168.1.35:8000'
 node_base_url = 'http://iot.namnguyenhoai.com:8000'
 local_base_package = '/home/namnguyen/django/cs20.10_v2/packages'
 pi_base_package = '/home/pi/cs20.10_v2/packages'
 # copy version 2 to update
 subprocess.run(['cp', 'dist/pi_temp-0.0.2.tar.gz',
-               '/tmp/pi_temp-0.0.2.tar.gz'], cwd=local_base_package)
+               '/tmp/pi_temp-0.0.2.tar.gz'], cwd=pi_base_package)
 # seed the node
 seed_response = requests.post(
     node_base_url + '/api/seed', data={'node_address': '127.0.0.1'})
@@ -41,7 +41,7 @@ while loop < 1000:
         print('get info from blockchain')
         # register node
         register_response = requests.post(
-            base_url + '/api/nodes/register', data={'nodes[]': 'http://127.0.0.1:5000'})
+            base_url + '/api/nodes/register', data={'nodes[]': node_base_url})
         print(register_response.json())
         rollback_start_time = time.time()
         # sync data from another node
