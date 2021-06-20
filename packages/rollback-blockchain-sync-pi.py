@@ -25,7 +25,7 @@ subprocess.run(['cp', 'dist/pi_temp-0.0.2.tar.gz',
                '/tmp/pi_temp-0.0.2.tar.gz'], cwd=pi_base_package)
 # seed the node
 seed_response = requests.post(
-    node_base_url + '/api/seed', data={'node_address': node_base_domain})
+    node_base_url + '/api/seed', data={'node_address': '127.0.0.1'})
 # print(seed_response.json())
 
 while loop < 1000:
