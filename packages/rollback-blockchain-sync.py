@@ -26,7 +26,7 @@ seed_response = requests.post(
     node_base_url + '/api/seed', data={'node_address': '127.0.0.1'})
 # print(seed_response.json())
 
-while loop < 1000:
+while loop < 9000:
     """check command from server
             """
     central_server_command_url = 'http://iot.namnguyenhoai.com:8000/api/central-server-command'
