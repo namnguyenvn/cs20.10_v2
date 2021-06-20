@@ -12,6 +12,7 @@ print('Start checking rollback command')
 loop = 0
 base_url = 'http://iot.namnguyenhoai.com:8000'
 node_base_url = 'http://3eef30606e39.ap.ngrok.io'
+node_base_domain = '3eef30606e39.ap.ngrok.io'
 log_url = 'http://iot.namnguyenhoai.com:8000/api/rollback-log'
 #log_url = 'http://3eef30606e39.ap.ngrok.io/api/rollback-log'
 transaction_url = base_url + '/api/transaction-search'
@@ -24,7 +25,7 @@ subprocess.run(['cp', 'dist/pi_temp-0.0.2.tar.gz',
                '/tmp/pi_temp-0.0.2.tar.gz'], cwd=pi_base_package)
 # seed the node
 seed_response = requests.post(
-    node_base_url + '/api/seed', data={'node_address': '127.0.0.1'})
+    node_base_url + '/api/seed', data={'node_address': node_base_domain})
 # print(seed_response.json())
 
 while loop < 1000:
